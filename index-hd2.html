@@ -1,0 +1,297 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Free Piano Online</title>
+
+  <meta name="description" content="Free Piano Online">
+  <link rel="icon" href="favicon.ico">
+  
+  		    <meta property="og:title" content="Free Piano Online"/>
+			<meta property="og:description" content="Play Piano Online for free." />			
+			<meta property="og:type" content="product"/>
+			<meta property="og:url" content="http://www.freepiano.online"/>
+			<meta property="og:image" content="http://www.freepiano.online/cover-photo.png"/>
+			<meta property="og:image:alt" content="Free Piano Online"/>
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla%7CMontserrat:700">
+  <link rel="stylesheet" href="css/screen2.css">
+  <link rel="stylesheet" type="text/css" href="piano.css" />
+  <link rel='stylesheet' type='text/css' href='https://d33wubrfki0l68.cloudfront.net/css/9fd646c780be52967fa5a6057ebc6a7ce158583d/css/font-awesome.min.css' />
+  <style>
+  html {
+		position: relative;
+		height: 100%;
+	}
+	body {
+		background-color: #458fa7;
+		min-height: 100%;
+	}
+
+	header {
+		padding:25px;
+		/*padding-top:0px;
+		padding-bottom:15px;*/
+	}	
+	footer {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		height: 35px; /*65px;*/
+		width: 100%;
+		overflow:hidden;
+		padding: 5px; /*1.2rem;*/
+	}
+	/*.ddtest {
+		height:516px;
+	} */
+	div.footerdiv{
+		margin:0 auto 0 auto;
+	}
+	h1 {
+		color: navy;
+		margin-left: 20px;
+	}
+	h2 {
+		font-size:1.4rem;
+		margin-top: 10px;
+		margin-bottom: 0px;
+	}
+	p.lead {
+		margin-bottom:0px;
+	}
+	p.footerP{
+		margin-bottom:0px;
+	}
+	div.header-logo-div {
+		padding-left: 50px;
+		padding-right: 50px;
+		float: left;
+	}
+	div.drop-zone {
+		height:12rem;
+		top:8.5rem;
+		border-style: dashed;
+		border-color: #c3c3c3;		
+	}
+	div.drop-zone-label {
+		height:25rem;
+		top:4.2rem; /*8.5rem;*/
+	}
+	div.color-thief-output {
+		padding-bottom:0px;
+	}
+	div.divSpacing5px{
+		padding:5px;
+	}
+	div.box  {
+		border-color: red;
+		border-width: 2px;
+		border-style:none;
+		border-radius:10px;
+		margin:1px;
+	}	
+	div.box:hover {
+		border-color: #10566c;
+		border-width: 2px;
+		border-style:solid;
+	}
+	div.swatch {
+ 		  padding: 15px 15px 15px 15px;
+		  overflow: visible;
+		  /*box-shadow: 5px 5px 2px #888888;
+		  margin: 20px 20px 20px 20px;*/
+		  position: relative;	
+	}
+	div.swatches {
+		padding-top:8px;
+		padding-left:8px;
+		padding-right:8px;
+		display:inline-block;
+	}
+	button.x {
+		position: absolute;
+		color: white;
+		top: -10px; /*-8px;*/
+		right: -8px;
+		width: 23px;
+		height: 23px;
+		border-radius: 23px;
+		border-width:0px;
+		display: inline-block;
+		background:url('close-x2.gif') no-repeat top left;	
+		background-color: #ff0000;			
+			/*display: inline-block;
+			background-color: #588596;
+			color: #ffe300;	
+			*/		
+		display:none;  // for some reason this need to be at the bottom
+	}
+	/*div.divSavePalette{
+		padding-top:15px;
+	}*/
+	button.btndownload {
+		background-color: #008CBA; /*4CAF50;  Green */
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		border-radius:7px;
+	}
+	button.btndownload:hover {
+		background-color: #10566c; /* Green */
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+	}	
+	.stext {
+		color:#ADCED8;
+		text-align:center;
+		padding-bottom:20px;
+	}
+	div.div-browse{
+		display:none;
+	}
+	input.userselfile{
+		color:transparent;
+		width:1px;
+		height:1px;
+		opacity:0;
+	}
+  </style>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102897656-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-102897656-4');
+</script>
+<!-- Hotjar Tracking Code for https://www.hdrainbow.com -->
+<!--script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:-------------------------------------------,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script-->
+</head>
+<body>
+<!------------------------------------------------------------------------------------------------------------------------------------------- 
+ --------------- This application is a fork of Peter Coles javascript piano https://github.com/mrcoles/javascript-piano  Peter Coles  https://twitter.com/lethys
+ --------------------------------------------------------------------------------------------------------------------------------------------  
+-->
+  <header>
+	<div class="header-logo-div">
+		<img src="log-with-text.png" alt="HD Rainbow">
+	</div>
+    <div class="container">
+      <!--h2 class="logo">HD Rainbow</h2-->
+      <p class="lead">Free Piano ee Online.</p>
+    </div>
+  </header>
+
+  <section id="drag-dropa" class="drag-drop-section ddtest"> 
+    <div class="container">
+        <div id="content">
+            <div id="content-inner">
+                <div id="piano">
+                    <!--h1>Free Piano Online</h1-->
+                    <div class="help show" tabindex="1">
+                        <div class="help-inner">
+                            <div id="synth-settings"></div>
+                            <div class="opts">
+                                <p><strong>Controls:</strong></p>
+                                <p>play using home row &amp; above &nbsp; /</p>
+                                <p>change playable keys: “,” &amp; “.” &nbsp; /</p>
+                                <p>shift keyboard: ← &amp; → <span id="shift"></span></p>
+                            </div>
+                            <div class="opts">
+                                <p><strong>Extras:</strong></p>
+                                <p class="toggle-color toggle hold">Color - c &nbsp; /</p>
+                                <p class="toggle-demo toggle">Demo - m &nbsp; /</p>
+                                <p class="toggle-animate toggle">Visual mode - 8 &nbsp; /</p>
+                                <p class="toggle-looper">Looper - 9 &nbsp; /</p>
+                                <p>Help - 0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="loop" tabindex="2">loop</div>
+                </div>
+            </div>
+        </div>		  
+		  			<!--p class="lead stext">Press any key.</p-->
+		  <!--span class="stext">Your images are processed inside the browser, never sent to server.</span-->
+    </div>
+
+  </section>
+  <footer>
+    <div class="container footerdiv">
+      <p class="footerP">
+	  <a href="https://www.facebook.com/freepiano.online/"><span class="fa fa-facebook"></span></a> &emsp; &ensp; 
+	  <a href="https://twitter.com/prakis"><span class="fa fa-twitter"></span></a> &emsp; &ensp; 
+	  <a href="https://github.com/mrcoles/javascript-piano"><span class="fa fa-code"></span></a> &emsp; &ensp; 
+	  <a href="mailto:kishore@tealpod.com"><span class="fa fa-envelope"></span></a>
+	  </p>	  
+    </div>
+  </footer>
+
+  <div id="sharing" class="sharing-section" style="top:10px;" >
+                        <div class="logo-container row">
+							<div class="header-logo-div" style="padding-right:10px;padding-top:15px;">
+							    <a href="https://twitter.com/share" class="twitter-share-button" data-via="prakis" data-size="large">Tweet</a>
+							<!--a href="https://www.watermark.ink">
+								<img src="ink-ad-30.png" alt="Watermark.ink">
+							</a--> 
+							</div>
+                            <!--div class="col-xs-8 title">
+                                <span>Watermark.</span><span class="ink">ink</span>
+                            </div-->
+                        </div>  
+
+
+
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  
+   </div> 
+  
+
+  
+  <!--script src="js/jquery.js"></script-->
+  <!--script src="js/mustache.js"></script-->
+        <script src="jquery-1.7.1.min.js"></script>
+        <script src="audio.js"></script>
+        <script src="piano.js"></script>  
+<script src="hdr.js" ></script> 
+<script>
+	$(function() {
+	//console.log("isMobile--"+isMobile());
+		if(isMobile()){
+			$('.header-logo-div').css('padding-left','0px');
+			$('.header-logo-div').css('padding-right','0px');
+			$('.drop-zone-label').css('pointer-events', 'auto');			
+			$('.dzd').hide();
+			$('.drag-drop-section').show();
+			$('.div-browse').show();
+			$('#sharing').hide();
+		}
+	});
+</script>
+
+</body>
+</html>

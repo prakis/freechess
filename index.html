@@ -1,0 +1,422 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Free Chess Online</title>
+
+  <meta name="description" content="Free Chess Online">
+  <link rel="icon" href="favicon.ico">
+  
+  		    <meta property="og:title" content="Free Chess Online"/>
+			<meta property="og:description" content="Play Chess Online for free." />			
+			<meta property="og:type" content="product"/>
+			<meta property="og:url" content="https://www.freeChess.online"/>
+			<meta property="og:image" content="https://www.freeChess.online/cover-photo.png"/>
+			<meta property="og:image:alt" content="Free Chess Online"/>
+			<meta name="description" content="A Free Chess inside your browser">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla%7CMontserrat:700">
+  <link rel="stylesheet" href="css/screen.css">
+  <link rel='stylesheet' type='text/css' href='https://d33wubrfki0l68.cloudfront.net/css/9fd646c780be52967fa5a6057ebc6a7ce158583d/css/font-awesome.min.css' />
+  <script type="text/ecmascript" src="common/xhr.js"></script>
+  <script type="text/ecmascript" src="chess.js"></script>
+  <link type="text/css" rel="stylesheet" href="css/chess.css" />
+  <link type="text/css" rel="stylesheet" href="css/gnomechess.css" />  
+  <style>
+  html {
+		position: relative;
+		height: 100%;
+	}
+	body {
+		background-color: #458fa7;
+		min-height: 100%;
+	}
+
+	/*header {
+		padding:25px;
+		/ *padding-top:0px;
+		padding-bottom:15px;* /
+	}*/	
+	footer {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		height: 25px; /*65px;*/
+		width: 100%;
+		overflow:hidden;
+		padding: 5px; /*1.2rem;*/
+	}
+	/*.ddtest {
+		height:516px;
+	} */
+	div.footerdiv{
+		margin:0 auto 0 auto;
+	}
+	h1 {
+		color: navy;
+		margin-left: 20px;
+	}
+	h2 {
+		font-size:1.4rem;
+		margin-top: 10px;
+		margin-bottom: 0px;
+	}
+	p.lead {
+		margin-bottom:0px;
+	}
+	p.footerP{
+		margin-bottom:0px;
+	}
+	div.header-logo-div {
+		/*padding-left: 50px;*/
+		padding-right: 50px;
+		float: left;
+	}
+	div.drop-zone {
+		height:12rem;
+		top:8.5rem;
+		border-style: dashed;
+		border-color: #c3c3c3;		
+	}
+	div.drop-zone-label {
+		height:25rem;
+		top:4.2rem; /*8.5rem;*/
+	}
+	div.color-thief-output {
+		padding-bottom:0px;
+	}
+	div.divSpacing5px{
+		padding:5px;
+	}
+	div.box  {
+		border-color: red;
+		border-width: 2px;
+		border-style:none;
+		border-radius:10px;
+		margin:1px;
+	}	
+	div.box:hover {
+		border-color: #10566c;
+		border-width: 2px;
+		border-style:solid;
+	}
+	div.swatch {
+ 		  padding: 15px 15px 15px 15px;
+		  overflow: visible;
+		  /*box-shadow: 5px 5px 2px #888888;
+		  margin: 20px 20px 20px 20px;*/
+		  position: relative;	
+	}
+	div.swatches {
+		padding-top:8px;
+		padding-left:8px;
+		padding-right:8px;
+		display:inline-block;
+	}
+	button.x {
+		position: absolute;
+		color: white;
+		top: -10px; /*-8px;*/
+		right: -8px;
+		width: 23px;
+		height: 23px;
+		border-radius: 23px;
+		border-width:0px;
+		display: inline-block;
+		background:url('close-x2.gif') no-repeat top left;	
+		background-color: #ff0000;			
+			/*display: inline-block;
+			background-color: #588596;
+			color: #ffe300;	
+			*/		
+		display:none;  // for some reason this need to be at the bottom
+	}
+	/*div.divSavePalette{
+		padding-top:15px;
+	}*/
+	button.btndownload {
+		background-color: #008CBA; /*4CAF50;  Green */
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		border-radius:7px;
+	}
+	button.btndownload:hover {
+		background-color: #10566c; /* Green */
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+	}	
+	.stext {
+		color:#ADCED8;
+		text-align:center;
+		padding-bottom:20px;
+	}
+	div.div-browse{
+		display:none;
+	}
+	input.userselfile{
+		color:transparent;
+		width:1px;
+		height:1px;
+		opacity:0;
+	}
+  </style>
+<script type="text/javascript">
+var nVwPressed = false;
+function pressVwBtn(nBtnId) {
+	if (nVwPressed) { document.getElementById("viewBtn" + nVwPressed).className = ""; }
+	document.getElementById("viewBtn" + nBtnId).className = "pressedBtn";
+	nVwPressed = nBtnId;
+}
+
+// Firefox only
+function onPGNLoaded(frEvnt) {
+	var sFBody = frEvnt.target.result;
+	chess.readPGN(sFBody, document.chessCtrl3.plyerClr2[1].checked);
+}
+
+// Firefox only
+function loadPGNFile() {
+	var oFile = document.getElementById("PGNFileData").files[0];
+	if (oFile) {
+		var oFReader = new FileReader();
+		oFReader.onload = onPGNLoaded;
+		oFReader.readAsText(oFile);
+	}
+}
+
+function initChess() {
+	chess.useAI(document.chessCtrl1.useAI.checked);
+	chess.setPromotion(document.chessCtrl1.selPromo.selectedIndex);
+	chess.setFrameRate(Math.abs(Number(document.chessCtrl2.frameRateCtrl.value)) || 1000);
+	chess.setSide(document.chessCtrl2.selSide.selectedIndex);
+	chess.useKeyboard(document.chessCtrl2.KeybCtrl.checked);
+	chess.placeById("chessDesk");
+	document.chessCtrl1.plyDepthCtrl.value = "0";
+	chess.setView(1);
+	pressVwBtn(1);
+	
+	document.getElementById("chessCtrlPanel").style.display = "none";
+	document.getElementById("chessSizeHandle").style.display = "none";
+	//document.getElementById("chess2DBox").style.width 
+	
+}
+</script>
+<style type="text/css">
+body {
+	height:100%;
+}
+hr {
+	width: 30%;
+	margin-top: 32px;
+	margin-bottom: 24px;
+}
+
+img.tbBtn {
+	cursor: pointer;
+	margin: 1px 3px 1px 3px;
+}
+
+#pgnTable {
+	width: auto;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	border: 0;
+}
+
+#pgnTable tr td { padding: 2px; }
+
+#chessDesk {
+	clear: both;
+	width: auto;
+	height: auto;
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+#chessToolBar {
+	width: 550px;
+	height: auto;
+	margin: 12px auto;
+	background-color: #969696;
+	-moz-box-shadow: inset 0 25px 27px -10px #BDBDBD;
+	-webkit-box-shadow: inset 0 25px 27px -10px #BDBDBD;
+	box-shadow: inset 0 25px 27px -10px #BDBDBD;
+	border-bottom: 1px solid #424242;
+	text-align:center;
+	padding: 6px 3px 2px 3px;
+}
+
+#setViewBtns {
+	width: auto;
+	float: left;
+}
+
+#setViewBtns span {
+	margin: 0 3px;
+	display: inline-block;
+	font: 12px / 13px "Lucida Grande", sans-serif;
+	text-shadow: rgba(255, 255, 255, 0.4) 0 1px;
+	padding: 3px 6px;
+	border: 1px solid rgba(0, 0, 0, 0.6);
+	background-color: #969696;
+	cursor: default;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-moz-box-shadow: rgba(255, 255, 255, 0.4) 0 1px, inset 0 20px 20px -10px white;
+	-webkit-box-shadow: rgba(255, 255, 255, 0.4) 0 1px, inset 0 20px 20px -10px white;
+	box-shadow: rgba(255, 255, 255, 0.4) 0 1px, inset 0 20px 20px -10px white;
+}
+#setViewBtns span.pressedBtn {
+	background: #B5B5B5;
+	-moz-box-shadow: inset rgba(0, 0, 0, 0.4) 0 -5px 12px, inset rgba(0, 0, 0, 1) 0 1px 3px, rgba(255, 255, 255, 0.4) 0 1px;
+	-webkit-box-shadow: inset rgba(0, 0, 0, 0.4) 0 -5px 12px, inset rgba(0, 0, 0, 1) 0 1px 3px, rgba(255, 255, 255, 0.4) 0 1px;
+	box-shadow: inset rgba(0, 0, 0, 0.4) 0 -5px 12px, inset rgba(0, 0, 0, 1) 0 1px 3px, rgba(255, 255, 255, 0.4) 0 1px;
+}
+.noDisplay {
+	display:none;
+}
+</style>  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102897656-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-102897656-5');
+</script>
+<!------------------------------------------------------------------------------------------------------------------------------------------- 
+ --------------- This application is a fork of Peter Coles javascript Chess https://github.com/mrcoles/javascript-Chess  Peter Coles  https://twitter.com/lethys
+ --------------------------------------------------------------------------------------------------------------------------------------------  
+-->
+</head>
+<body onload="initChess();">
+  <header>
+	<div class="header-logo-div">
+		<img src="logo-with-text2.png" alt="Free Chess Online" style="width:80%;">
+	</div>
+    <div class="container">
+      <!--h2 class="logo">Free Chess Online</h2-->
+      <p class="lead" style="color:white;">Free For you</p>
+    </div>
+  </header>
+  <section id="drag-drop" class="drag-drop-section ddtest"> 
+  	<form name="chessCtrl1" onsubmit="return(false);" class="noDisplay">
+		<p style="text-align:center;">[&nbsp;<input id="useAIAsk" name="useAI" type="checkbox" onclick="chess.useAI(this.checked);" checked /> <label for="useAIAsk">Against machine</label> | Promotion to: <select onchange="chess.setPromotion(this.selectedIndex);" name="selPromo"><option>Queen</option><option>Rook</option><option>Bishop</option><option>Knight</option></select> | <input type="button" name="strtBtn" value="New game" onclick="chess.organize(this.form.plyerClr1[1].checked);" /> (Human: <input type="radio" name="plyerClr1" id="white1" checked /> <label for="white1">white</label> <input type="radio" name="plyerClr1" id="black1" /> <label for="black1">black</label>) | Machine meditation level (press return to save): <input type="text" name="plyDepthCtrl" value="0" size="2" onkeypress=";if(event.keyCode===13&&chess.setPlyDepth(this.value)){alert('Ply depth setted.' + (Number(this.value) > 2 ? '\nAttention! The game could be very slow.' : ' Good game :)'));}" />&nbsp;]</p>
+
+		<div id="chessToolBar"><div id="setViewBtns"><span id="viewBtn2" onclick="chess.setView(2);pressVwBtn(2);" onmousedown="return(false);">3D view</span><span id="viewBtn1" onclick="chess.setView(1);pressVwBtn(1);" onmousedown="return(false);">2D view</span><span id="viewBtn3" onclick="chess.setView(3);pressVwBtn(3);" onmousedown="return(false);">Both</span></div>
+		<img class="tbBtn" src="icons/skip-backward.png" title="" onclick="chess.backToStart();" />
+		<img class="tbBtn" src="icons/backward.png" title="" onclick="chess.navigate(-10, true);" />
+		<img class="tbBtn" src="icons/reverse-play.png" title="" onclick="chess.navigate(-1, true);" />
+		<img class="tbBtn" src="icons/stop.png" title="" onclick="chess.stopMotion();" />
+		<img class="tbBtn" src="icons/play.png" title="" onclick="chess.navigate(1, true);" />
+		<img class="tbBtn" src="icons/forward.png" title="" onclick="chess.navigate(10, true);" />
+		<img class="tbBtn" src="icons/skip-forward.png" title="" onclick="chess.returnToEnd();" />
+		<img class="tbBtn" src="icons/go-previous.png" title="" onclick="chess.navigate(-1);">
+		<img class="tbBtn" src="icons/go-next.png" title="" onclick="chess.navigate(1);" />
+		<img class="tbBtn" src="icons/help-hint.png" title="" onclick="chess.help();" />
+		</div>
+	</form>
+
+	<div id="chessDesk"></div>
+
+	<form name="chessCtrl2" onsubmit="return(false);" class="noDisplay">
+		<p style="text-align:center;">[&nbsp;View side: <select onchange="chess.setSide(this.selectedIndex);" name="selSide"><option>White</option><option>Black</option><option selected>Human side</option></select> | <input id="useKeybAsk" name="KeybCtrl" type="checkbox" onclick="chess.useKeyboard(this.checked);" checked /> <label for="useKeybAsk">Enable keyboard</label> | Motion frame rate: <input type="text" name="frameRateCtrl" value="1000" size="5" onchange="var nMs=new Number(this.value);if(!isNaN(nMs)&&nMs>0){chess.setFrameRate(nMs);}" /> ms&nbsp;]</p>
+	</form>
+	<h3 style="text-align:center;" class="noDisplay">Portable Game Notation reader</h3>
+	<form name="chessCtrl3" onsubmit="return(false);" class="noDisplay">
+		<table id="pgnTable">
+		<tbody>
+		<tr><td colspan="2" style="text-align:center;">Human is: <input type="radio" name="plyerClr2" id="white2" checked /> <label for="white2">white</label> <input type="radio" name="plyerClr2" id="black2" /> <label for="black2">black</label></td>
+		<tr>
+		<td>Select a PGN file (Firefox only):</td>
+		<td><input type="file" id="PGNFileData" /> <a href="#" onclick="loadPGNFile(); return(false);">Load</a></td>
+		</tr>
+		<tr>
+		<td>or paste your PGN file's body here:</td>
+		<td><textarea rows="10" cols="50" id="PGNBodyArea"></textarea> <a href="#" onclick="chess.readPGN(document.getElementById('PGNBodyArea').value,document.chessCtrl3.plyerClr2[1].checked);return(false);">Load</a><br />
+		(you can try with <a href="sample.pgn">this</a> example PGN file)</td>
+		</tr>
+		</tbody>
+		</table>
+	</form>
+	<!--hr /-->
+	<p class="noDisplay" style="text-align:center;">[&nbsp;<a href="http://htmlchess.sourceforge.net" title="Go to Home Page" target="_blank">Home</a> | <a href="http://sourceforge.net/projects/htmlchess/forums" title="Go to Forums" target="_blank">Forums</a> | <a href="https://sourceforge.net/projects/htmlchess/forums/forum/1182797/topic/3792347" title="Send a comment" target="_blank">Send a comment</a>&nbsp;]</p>
+	<!--
+	<hr />
+	<h3 style="text-align:center;">Running code within the "chess" object.</h3>
+	<p style="text-align:center;">Please uncomment the function chess.runInside(<em>sCode</em>) to execute your code.<br />
+	<textarea rows="10" cols="55" id="debugArea" onkeyup="if(event.ctrlKey&&event.shiftKey&&event.keyCode===32){chess.runInside(this.value);}">
+	/**
+	* Javascript Console.
+	* Press Ctrl+Shift+Space to run code
+	* within the "chess" object.
+	*/
+
+	var sRappr = "";
+	for (nBoardX = 0; nBoardX &lt; 12; nBoardX++) {
+		var nBoardY = 0;
+		for (nBoardY = 0; nBoardY &lt; 10; nBoardY++) { sRappr += (etc.aBoard[nBoardX * 10 + nBoardY]) + ", "; }
+		sRappr = sRappr.substr(0, sRappr.length - 2) + "\n";
+	}
+	alert("This is the numeric rappresentation of the chessboard:\n\n" + sRappr); 
+	</textarea></p>
+	-->
+  </section>
+  <footer>
+    <div class="container footerdiv">
+      <p class="footerP">
+	  <a href="https://www.facebook.com/freeChess.online/"><span class="fa fa-facebook"></span></a> &emsp; &ensp; 
+	  <a href="https://twitter.com/prakis"><span class="fa fa-twitter"></span></a> &emsp; &ensp; 
+	  <a href="http://htmlchess.sourceforge.net"><span class="fa fa-code"></span></a> &emsp; &ensp; 
+	  <a href="mailto:kishore@tealpod.com"><span class="fa fa-envelope"></span></a>
+	  </p>	  
+    </div>
+  </footer>
+
+  <div id="sharing" class="sharing-section" style="top:3px;" >
+                        <div class="logo-container row">
+							<div class="header-logo-div" style="padding-right:10px;padding-top:15px;">
+							<!--style>.bmc-button img{width: 27px !important;margin-bottom: 1px !important;box-shadow: none !important;border: none !important;vertical-align: middle !important;}.bmc-button{line-height: 36px !important;height:37px !important;text-decoration: none !important;display:inline-flex !important;color:#FFFFFF !important;background-color:#FF813F !important;border-radius: 3px !important;border: 1px solid transparent !important;padding: 1px 9px !important;font-size: 22px !important;letter-spacing: 0.6px !important;box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;margin: 0 auto !important;font-family:'Cookie', cursive !important;-webkit-box-sizing: border-box !important;box-sizing: border-box !important;-o-transition: 0.3s all linear !important;-webkit-transition: 0.3s all linear !important;-moz-transition: 0.3s all linear !important;-ms-transition: 0.3s all linear !important;transition: 0.3s all linear !important;}.bmc-button:hover, .bmc-button:active, .bmc-button:focus {-webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;text-decoration: none !important;box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;opacity: 0.85 !important;color:#FFFFFF !important;}</style><link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet"><a class="bmc-button" target="_blank" href="https://www.buymeacoffee.com/asha"><img src="https://www.buymeacoffee.com/assets/img/BMC-btn-logo.svg" alt="Buy me a coffee"><span style="margin-left:5px">Buy me a coffee</span></a-->
+							</div>
+                        </div>  
+
+
+
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  
+   </div> 
+  
+
+	<script src="jquery-1.7.1.min.js"></script>
+	<script src="hdr.js" ></script> 
+<script>
+	$(function() {
+	//console.log("isMobile--"+isMobile());
+		if(isMobile()){
+			$('.header-logo-div').css('padding-left','0px');
+			$('.header-logo-div').css('padding-right','0px');
+			$('.dzd').hide();
+			$('.div-browse').show();
+			$('#sharing').hide();
+		}
+	});
+</script>
+</body>
+</html>
